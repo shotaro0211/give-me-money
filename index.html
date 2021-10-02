@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" href="main.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="">
+    <link rel="apple-touch-icon" href="main.png">
+    <title>Shotaro Yamazaki</title>
+    <style>
+      .App {
+        text-align: center;
+      }
+      .Button {
+        margin-top: 0px;
+        text-align: center;
+        width: 400px;
+        height: 70px;
+        font-size: 20px;
+        -webkit-appearance: none;
+        appearance: none;
+        border: none;
+        outline: none;
+        background-color: black;
+        border-radius: 2px;
+        box-sizing: border-box;
+        color: #fff;
+        font-weight: bold;
+        padding: 14px 20px;
+        cursor: pointer;
+      }
+    </style>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+    <script>
+      try {
+        window.ethereum.enable();
+      } catch (err) {
+        window.location.href = 'https://news.mynavi.jp/cryptocurrency/metamask/';
+      }
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      let address = "0x4aC5CE2925A3a3DeA48b5220FE963c4A5168Cd2D"
+      const sendMoney = async() => {
+        const signer = provider.getSigner();
+        const tx = signer.sendTransaction({
+            to: address,
+            value: ethers.utils.parseEther(document.getElementById("money").value)
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div class="App">
+      <h1>Shotaro Yamazaki</h1>
+      <div>
+        <img style="width: 200px;" src="main.png" >
+      </div>
+      <div style="margin: 20px;">
+        <input id="money" type="number" placeholder="MATIC"><br>
+      </div>
+      <button class="Button" onclick="sendMoney()">Give me money</button><br/>
+    </div>
+  </body>
+</html>
